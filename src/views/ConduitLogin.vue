@@ -1,0 +1,35 @@
+<template>
+  <div class="wrap">
+    <h2>Sign in</h2>
+    <p><router-link to="/register">Need an account?</router-link></p>
+    <a-input placeholder="Email" />
+    <a-input placeholder="Password" />
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+.wrap {
+  width: 540px;
+  margin: 0 auto;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 36px;
+}
+p {
+  text-align: center;
+}
+a {
+  color: #5cb85c !important;
+}
+.ant-input {
+  width: 540px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+</style>
