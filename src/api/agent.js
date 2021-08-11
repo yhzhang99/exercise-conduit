@@ -1,7 +1,7 @@
 import axios from "axios";
 
-import commonStore from "@/stores/commonStore";
-import authStore from "@/stores/authStore";
+import commonStore from "@/store/commonStore";
+import authStore from "@/store/authStore";
 
 const API_ROOT = "https://conduit.productionready.io/api";
 const MOCK_ROOT = "/mock";

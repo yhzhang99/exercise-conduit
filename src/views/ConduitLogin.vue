@@ -4,6 +4,7 @@
     <p><router-link to="/register">Need an account?</router-link></p>
     <a-input placeholder="Email" />
     <a-input placeholder="Password" />
+    <button>Sign in</button>
   </div>
 </template>
 
@@ -31,5 +32,15 @@ a {
   width: 540px;
   height: 50px;
   margin-bottom: 15px;
+}
+button {
+  float: right;
+  width: 100px;
+  height: 60px;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+  border-radius: 5px;
+  font-size: 20px;
 }
 </style>
