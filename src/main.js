@@ -6,8 +6,7 @@ import router from "./router";
 import store from "./store";
 // import { Icon } from "ant-design-vue";
 // import { Menu } from "ant-design-vue";
-import Axios from "axios";
-Vue.prototype.$axios = Axios;
+
 Vue.config.productionTip = false;
 
 // Vue.use(Icon);

@@ -7,6 +7,7 @@ import ConduitLogin from "../views/ConduitLogin";
 import ConduitRegister from "../views/ConduitRegister";
 
 const routes = [
+  { path: "/", redirect: "/home" },
   {
     path: "/home",
     component: ConduitHome,

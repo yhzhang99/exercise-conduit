@@ -1,12 +1,17 @@
 <template>
-  <div>
+  <div id="bd">
     <div id="wrap">
       <h1>conduit</h1>
       <p>A place to share your knowledge.</p>
     </div>
     <div id="main">
       <a-menu mode="horizontal">
-        <a-menu-item class="ant-menu-item-active" key="mail">
+        <a-menu-item key="Your" @click="changeYour"> Your Feed </a-menu-item>
+        <a-menu-item
+          key="Global"
+          @click="changeGlobal"
+          :class="feed === 'global' ? 'ant-menu-item-active' : ''"
+        >
           Global Feed
         </a-menu-item>
       </a-menu>
@@ -14,7 +19,7 @@
         item-layout="vertical"
         size="large"
         :pagination="pagination"
-        :data-source="articleata"
+        :data-source="selectData"
       >
         <div slot="footer"><b>ant design vue</b> footer part</div>
         <a-list-item slot="renderItem" key="item.title" slot-scope="item">
@@ -46,6 +51,7 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      feed: "global",
       pagination: {
         onChange: (page) => {
           console.log(page);
@@ -55,7 +61,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getArt"]),
+    ...mapActions(["getArt", "getFeed"]),
     // addItem() {
     //   getArticles().then((response) => {
     //     this.ac = response.articles;
@@ -63,17 +69,34 @@ export default {
     //   });
     //   // .catch((err) => {});
     // },
+    changeYour() {
+      this.feed = "your";
+      this.getFeed();
+    },
+    changeGlobal() {
+      this.feed = "global";
+    },
   },
   created() {
     this.getArt();
   },
   computed: {
-    ...mapState(["articleata"]),
+    ...mapState(["articleData", "feedData"]),
+    selectData() {
+      if (this.feed === "your") {
+        return this.feedData;
+      } else {
+        return this.articleData;
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+#bd {
+  min-height: 679px;
+}
 #wrap {
   width: 100%;
   height: 170px;
@@ -107,9 +130,10 @@ p {
   margin: 0 auto;
   margin-top: 50px;
 }
-.ant-menu-item-active {
-  color: #5cb85c;
-  border-bottom: 2px solid #5cb85c;
+.ant-menu-item-active,
+.ant-menu-item-selected {
+  color: #5cb85c !important;
+  border-bottom: 2px solid #5cb85c !important;
 }
 img {
   display: inline-block;

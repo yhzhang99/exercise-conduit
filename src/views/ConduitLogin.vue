@@ -2,19 +2,58 @@
   <div class="wrap">
     <h2>Sign in</h2>
     <p><router-link to="/register">Need an account?</router-link></p>
-    <a-input placeholder="Email" />
-    <a-input placeholder="Password" />
-    <button>Sign in</button>
+    <a-input placeholder="Email" v-model="user.email" />
+    <a-input type="password" placeholder="Password" v-model="user.password" />
+    <button @click="signIn">Sign in</button>
   </div>
 </template>
 
 <script>
-export default {};
+import login from "../api/login";
+import { mapMutations } from "vuex";
+export default {
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapMutations("commonStore", ["changeToken"]),
+    signIn() {
+      // let _this = this;
+      if (this.user.email === "" || this.user.password === "") {
+        alert("账号或密码不能为空");
+      } else {
+        login(this.user)
+          .then((response) => {
+            this.changeToken(response.user);
+            this.$router.push("/home");
+            setTimeout(function () {
+              window.location.reload();
+            }, 100);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        // .catch((error) => {
+        //   alert("账号或密码错误");
+        //   console.log(error);
+        // });
+      }
+    },
+  },
+
+  computed: {},
+};
 </script>
 
 <style scoped>
 .wrap {
   width: 540px;
+  height: 679px;
   margin: 0 auto;
 }
 h2 {

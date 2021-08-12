@@ -2,20 +2,54 @@
   <div class="wrap">
     <h2>Sign up</h2>
     <p><router-link to="/login">Have an account?</router-link></p>
-    <a-input placeholder="Username" />
-    <a-input placeholder="Email" />
-    <a-input placeholder="Password" />
-    <button>Sign in</button>
+    <a-input placeholder="Username" v-model="user.username" />
+    <a-input placeholder="Email" v-model="user.email" />
+    <a-input type="password" placeholder="Password" v-model="user.password" />
+    <button @click="signUp">Sign up</button>
   </div>
 </template>
 
 <script>
-export default {};
+import register from "../api/register";
+// import { mapState } from "vuex";
+import { mapMutations } from "vuex";
+export default {
+  data() {
+    return {
+      user: {
+        username: "",
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapMutations("commonStore", ["changeToken"]),
+    signUp() {
+      register(this.user)
+        .then((response) => {
+          this.changeToken(response.user);
+          this.$router.push("/home");
+          setTimeout(function () {
+            window.location.reload();
+          }, 100);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+
+  // computed: {
+  //   ...mapState("authStore", ["token"]),
+  // },
+};
 </script>
 
 <style scoped>
 .wrap {
   width: 540px;
+  height: 679px;
   margin: 0 auto;
 }
 h2 {

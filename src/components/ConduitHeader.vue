@@ -1,7 +1,7 @@
 <template>
   <div class="w h">
     <div id="left">
-      <a href="https://vue-vuex-realworld.netlify.app/#/">conduit</a>
+      <router-link to="/home">conduit</router-link>
     </div>
     <div id="right">
       <ul>
@@ -9,21 +9,51 @@
           <router-link to="/home">Home</router-link>
         </li>
         <li>
-          <router-link to="/login"><a-icon type="form" />Sign in</router-link>
+          <router-link to="/login" v-if="token === ''"
+            ><a-icon type="form" />Sign in</router-link
+          >
         </li>
         <li>
-          <router-link to="/register"
+          <router-link to="/register" v-if="token === ''"
             ><a-icon type="form" />Sign up</router-link
           >
         </li>
+        <li>
+          <a href="###" v-if="token !== ''" @click="exit"
+            ><a-icon type="logout" />Exit</a
+          >
+        </li>
+        <!-- <button @click="qwe">e1231</button> -->
       </ul>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      data() {
+        return {};
+      },
+    };
+  },
+  methods: {
+    ...mapActions("authStore", ["logout"]),
+    exit() {
+      this.logout();
+      console.log(this.token);
+      setTimeout(function () {
+        window.location.reload();
+      }, 100);
+    },
+    // qwe() {
+    //    console.log(this.token);
+    // }
+  },
+  computed: {
+    ...mapState("commonStore", ["token"]),
   },
 };
 </script>
@@ -42,7 +72,7 @@ export default {
   font-family: sans-serif;
   font-size: 22px;
   font-weight: bolder;
-  color: #5cb85c;
+  color: #5cb85c !important;
 }
 a,
 a:link,
@@ -66,7 +96,7 @@ li {
   padding: 0 10px 0 10px;
   color: rgba(0, 0, 0, 0.3);
 }
-.router-link-active {
+#right .router-link-active {
   color: rgba(0, 0, 0, 0.8) !important;
 }
 </style>

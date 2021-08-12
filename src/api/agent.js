@@ -17,7 +17,7 @@ const requestConfigAdapter = (config) => {
 
 const handleErrors = (err) => {
   if (err && err.response && err.response.status === 401) {
-    authStore.logout();
+    authStore.actions.logout();
   }
   return Promise.reject(err.response);
 };
@@ -25,8 +25,8 @@ const handleErrors = (err) => {
 const responseData = (res) => res.data;
 
 const tokenPlugin = (config) => {
-  if (commonStore.token) {
-    config.headers["authorization"] = `Token ${commonStore.token}`;
+  if (commonStore.state.token) {
+    config.headers["authorization"] = `Token ${commonStore.state.token}`;
   }
 
   return config;
