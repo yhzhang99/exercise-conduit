@@ -30,7 +30,7 @@ export default new Vuex.Store({
   },
   mutations: {
     getArt(state, articles) {
-      state.articleata = articles;
+      state.articleData = articles;
     },
     getFeed(state, articles) {
       state.feedData = articles;

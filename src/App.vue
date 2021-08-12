@@ -2,7 +2,7 @@
   <div>
     <conduit-header></conduit-header>
     <router-view></router-view>
-    <footer><conduit-footer></conduit-footer></footer>
+    <conduit-footer></conduit-footer>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-html {
+/* html {
   height: 100%;
 }
 body {
@@ -43,5 +43,5 @@ footer {
   width: 100%;
   height: 60px;
   background-color: #ffc0cb;
-}
+} */
 </style>

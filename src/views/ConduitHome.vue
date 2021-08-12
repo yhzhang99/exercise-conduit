@@ -21,7 +21,6 @@
         :pagination="pagination"
         :data-source="selectData"
       >
-        <div slot="footer"><b>ant design vue</b> footer part</div>
         <a-list-item slot="renderItem" key="item.title" slot-scope="item">
           <template slot="actions">
             <span>
