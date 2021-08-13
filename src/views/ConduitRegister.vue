@@ -5,6 +5,29 @@
     <a-input placeholder="Username" v-model="user.username" />
     <a-input placeholder="Email" v-model="user.email" />
     <a-input type="password" placeholder="Password" v-model="user.password" />
+    <div>
+      <a-alert
+        type="error"
+        :message="'Username ' + item"
+        banner
+        v-for="(item, index) in err.username"
+        :key="index"
+      />
+      <a-alert
+        type="error"
+        :message="'Email ' + item"
+        banner
+        v-for="(item, index) in err.email"
+        :key="index"
+      />
+      <a-alert
+        type="error"
+        :message="'Password ' + item"
+        banner
+        v-for="(item, index) in err.password"
+        :key="index"
+      />
+    </div>
     <button @click="signUp">Sign up</button>
   </div>
 </template>
@@ -21,6 +44,11 @@ export default {
         email: "",
         password: "",
       },
+      err: {
+        email: [],
+        username: [],
+        password: [],
+      },
     };
   },
   methods: {
@@ -32,24 +60,21 @@ export default {
           this.$router.push("/home");
           setTimeout(function () {
             window.location.reload();
-          }, 100);
+          }, 0);
         })
         .catch((err) => {
-          console.log(err);
+          if (err.status === 422) {
+            this.err = err.data.errors;
+          }
         });
     },
   },
-
-  // computed: {
-  //   ...mapState("authStore", ["token"]),
-  // },
 };
 </script>
 
 <style scoped>
 .wrap {
   width: 540px;
-  height: 679px;
   margin: 0 auto;
 }
 h2 {

@@ -5,9 +5,9 @@ Vue.use(VueRouter);
 import ConduitHome from "../views/ConduitHome";
 import ConduitLogin from "../views/ConduitLogin";
 import ConduitRegister from "../views/ConduitRegister";
+import NotExist from "../views/404";
 
 const routes = [
-  { path: "/", redirect: "/home" },
   {
     path: "/home",
     component: ConduitHome,
@@ -20,15 +20,11 @@ const routes = [
     path: "/register",
     component: ConduitRegister,
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  // },
+  {
+    path: "/404",
+    component: NotExist,
+  },
+  { path: "*", redirect: "/home" },
 ];
 
 const router = new VueRouter({

@@ -38,14 +38,12 @@
       </a-list>
     </div>
     <div id="bottom"></div>
-    <!-- <button @click="addItem"></button> -->
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import { mapActions } from "vuex";
-// import getArticles from "../api/getArticles";
 
 export default {
   data() {
@@ -61,13 +59,6 @@ export default {
   },
   methods: {
     ...mapActions(["getArt", "getFeed"]),
-    // addItem() {
-    //   getArticles().then((response) => {
-    //     this.ac = response.articles;
-    //     console.log(this.ac);
-    //   });
-    //   // .catch((err) => {});
-    // },
     changeYour() {
       this.feed = "your";
       this.getFeed();

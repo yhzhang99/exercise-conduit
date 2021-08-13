@@ -23,7 +23,6 @@
             ><a-icon type="logout" />Exit</a
           >
         </li>
-        <!-- <button @click="qwe">e1231</button> -->
       </ul>
     </div>
   </div>
@@ -48,9 +47,6 @@ export default {
         window.location.reload();
       }, 100);
     },
-    // qwe() {
-    //    console.log(this.token);
-    // }
   },
   computed: {
     ...mapState("commonStore", ["token"]),

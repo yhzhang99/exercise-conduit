@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router/index";
 
 import commonStore from "@/store/commonStore";
 import authStore from "@/store/authStore";
@@ -18,6 +19,11 @@ const requestConfigAdapter = (config) => {
 const handleErrors = (err) => {
   if (err && err.response && err.response.status === 401) {
     authStore.actions.logout();
+  } else if (err && err.response && err.response.status === 404) {
+    console.log("123");
+    router.replace({
+      path: "/404",
+    });
   }
   return Promise.reject(err.response);
 };

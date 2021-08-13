@@ -38,7 +38,6 @@ export default new Vuex.Store({
     changeToken(state, user) {
       state.user = user;
       localStorage.setItem("token", user.token);
-      // console.log(state.user);
     },
   },
   actions: {

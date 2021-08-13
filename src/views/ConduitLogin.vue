@@ -4,6 +4,9 @@
     <p><router-link to="/register">Need an account?</router-link></p>
     <a-input placeholder="Email" v-model="user.email" />
     <a-input type="password" placeholder="Password" v-model="user.password" />
+    <div>
+      <a-alert type="error" :message="errLogin" banner v-if="errLogin" />
+    </div>
     <button @click="signIn">Sign in</button>
   </div>
 </template>
@@ -18,32 +21,28 @@ export default {
         email: "",
         password: "",
       },
+      errLogin: "",
     };
   },
   methods: {
     ...mapMutations("commonStore", ["changeToken"]),
     signIn() {
-      // let _this = this;
-      if (this.user.email === "" || this.user.password === "") {
-        alert("账号或密码不能为空");
-      } else {
-        login(this.user)
-          .then((response) => {
-            this.changeToken(response.user);
-            this.$router.push("/home");
-            setTimeout(function () {
-              window.location.reload();
-            }, 100);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        // .catch((error) => {
-        //   alert("账号或密码错误");
-        //   console.log(error);
-        // });
-      }
+      this.errLogin = "";
+      login(this.user)
+        .then((response) => {
+          this.changeToken(response.user);
+          this.$router.push("/home");
+          setTimeout(function () {
+            window.location.reload();
+          }, 0);
+        })
+        .catch((err) => {
+          if (err.status === 422) {
+            this.errLogin = "email or password is invalid";
+          }
+        });
     },
+    // },
   },
 
   computed: {},
@@ -53,7 +52,6 @@ export default {
 <style scoped>
 .wrap {
   width: 540px;
-  height: 679px;
   margin: 0 auto;
 }
 h2 {
