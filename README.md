@@ -1,5 +1,3 @@
-# tec-2ed-exercise3
-
 ## Project setup
 ```
 yarn install
